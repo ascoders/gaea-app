@@ -4,7 +4,11 @@ import * as React from "react"
 import * as ReactDOM from "react-dom"
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 
-export function gaeaApp(value: string, root: HTMLElement, extraComponentClasses: any[] = []) {
+export function gaeaApp(value: string, params: {
+  componentClasses: any[]
+} = {
+    componentClasses: []
+  }) {
   const config = JSON.parse(LZString.decompressFromBase64(value))
 
   /**
@@ -35,16 +39,18 @@ export function gaeaApp(value: string, root: HTMLElement, extraComponentClasses:
       return (
         <Route exact path={"/" + getFullPath(pageKey)} render={props => {
           const pageInfo = config.instancesArray.find((info: any) => info.pageKey === pageKey)
-          return <GaeaRender {...props} value={pageInfo.instances} componentClasses={extraComponentClasses} />
+          return (
+            <GaeaRender {...props} value={pageInfo.instances} componentClasses={params.componentClasses} />
+          )
         }} />
       )
     })
 
-  ReactDOM.render((
+  return (
     <BrowserRouter>
       <Switch>
         {Routes}
       </Switch>
     </BrowserRouter>
-  ), root)
+  )
 }
