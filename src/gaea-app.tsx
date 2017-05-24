@@ -2,12 +2,14 @@ import GaeaRender from "gaea-render"
 import * as LZString from "lz-string"
 import * as React from "react"
 import * as ReactDOM from "react-dom"
-import { BrowserRouter, Route, Switch } from "react-router-dom"
+import { BrowserRouter, Route, RouteProps, Switch } from "react-router-dom"
 
 export function gaeaApp(value: string, params: {
-  componentClasses: any[]
+  componentClasses: any[],
+  withFrame?: (app: React.ReactNode, props?: RouteProps) => React.ReactNode
 } = {
-    componentClasses: []
+    componentClasses: [],
+    withFrame: null
   }) {
   const config = JSON.parse(LZString.decompressFromBase64(value))
 
@@ -39,9 +41,13 @@ export function gaeaApp(value: string, params: {
       return (
         <Route exact path={"/" + getFullPath(pageKey)} render={props => {
           const pageInfo = config.instancesArray.find((info: any) => info.pageKey === pageKey)
-          return (
-            <GaeaRender {...props} value={pageInfo.instances} componentClasses={params.componentClasses} />
-          )
+          const app = <GaeaRender {...props} value={pageInfo.instances} componentClasses={params.componentClasses} />
+
+          if (params.withFrame) {
+            return params.withFrame(app, props)
+          }
+
+          return app
         }} />
       )
     })
