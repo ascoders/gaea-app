@@ -1,8 +1,9 @@
 {
   "name": "gaea-app",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
-  "main": "index.js",
+  "main": "built/index.js",
+  "typings": "src/index.ts",
   "scripts": {
     "start": "run-react start",
     "tslint": "tslint './src/**/*.?(ts|tsx)'",
