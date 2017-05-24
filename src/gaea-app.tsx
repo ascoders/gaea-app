@@ -5,8 +5,8 @@ import * as ReactDOM from "react-dom"
 import { BrowserRouter, Route, RouteProps, Switch } from "react-router-dom"
 
 export function gaeaApp(value: string, params: {
-  componentClasses: any[],
-  withFrame?: (app: React.ReactNode, props?: RouteProps) => React.ReactNode
+  componentClasses?: any[],
+  withFrame?: (app: () => React.ReactNode, props?: RouteProps) => React.ReactNode
 } = {
     componentClasses: [],
     withFrame: null
@@ -41,13 +41,13 @@ export function gaeaApp(value: string, params: {
       return (
         <Route exact path={"/" + getFullPath(pageKey)} render={props => {
           const pageInfo = config.instancesArray.find((info: any) => info.pageKey === pageKey)
-          const app = <GaeaRender {...props} value={pageInfo.instances} componentClasses={params.componentClasses} />
+          const renderApp = () => <GaeaRender {...props} value={pageInfo.instances} componentClasses={params.componentClasses} />
 
           if (params.withFrame) {
-            return params.withFrame(app, props)
+            return params.withFrame(renderApp, props)
           }
 
-          return app
+          return renderApp()
         }} />
       )
     })
