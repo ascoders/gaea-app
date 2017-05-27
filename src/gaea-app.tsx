@@ -6,7 +6,7 @@ import { BrowserRouter, Route, RouteProps, Switch } from "react-router-dom"
 
 export function gaeaApp(value: string, params: {
   componentClasses?: any[],
-  withFrame?: (app: React.ReactNode, props?: RouteProps) => React.ReactNode
+  withFrame?: (app: React.ReactNode, props?: RouteProps, config?: any) => React.ReactNode
 } = {
     componentClasses: [],
     withFrame: null
@@ -44,7 +44,7 @@ export function gaeaApp(value: string, params: {
           const app = <GaeaRender {...props} value={pageInfo.instances} componentClasses={params.componentClasses} />
 
           if (params.withFrame) {
-            return params.withFrame(app, props)
+            return params.withFrame(app, props, config)
           }
 
           return app
