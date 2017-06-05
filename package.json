@@ -1,6 +1,6 @@
 {
   "name": "gaea-app",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "",
   "main": "built/index.js",
   "typings": "src/index.ts",
@@ -35,14 +35,14 @@
     "tslint"
   ],
   "dependencies": {
+    "@types/react-router": "^4.0.9",
+    "@types/react-router-dom": "^4.0.4",
     "gaea-basic-components": "^1.0.5",
     "gaea-render": "^1.0.4",
     "lz-string": "^1.4.4",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router": "^4.1.1",
-    "react-router-dom": "^4.1.1",
-    "@types/react-router": "^4.0.9",
-    "@types/react-router-dom": "^4.0.4"
+    "react-router-dom": "^4.1.1"
   }
 }
