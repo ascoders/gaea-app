@@ -39,7 +39,7 @@ export function gaeaApp(value: string, params: {
     .filter((pageKey: string, index: number) => config.pages[pageKey].type === "page")
     .map((pageKey: string, index: number) => {
       return (
-        <Route exact path={"/" + getFullPath(pageKey)} render={props => {
+        <Route key={index} exact path={"/" + getFullPath(pageKey)} render={props => {
           const pageInfo = config.instancesArray.find((info: any) => info.pageKey === pageKey)
           const app = <GaeaRender {...props} value={pageInfo.instances} componentClasses={params.componentClasses} />
 
